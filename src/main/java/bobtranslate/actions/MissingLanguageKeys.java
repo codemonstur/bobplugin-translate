@@ -31,7 +31,7 @@ public enum MissingLanguageKeys {;
         for (final var name : names) {
             final var missingKeys = subtractSet(allKeys, keysPerFile.get(name));
             if (!missingKeys.isEmpty()) {
-                reporter.accept("File " + dir + "/" + name + " is missing " + missingKeys.size() + " keys: " + missingKeys);
+                reporter.accept("File " + name + " is missing " + missingKeys.size() + " keys: " + missingKeys);
                 returnCode++;
             }
         }

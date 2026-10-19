@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Map;
 
 import static java.nio.file.Files.readString;
@@ -15,7 +16,8 @@ public enum Functions {;
 
     private static final Type MAP_TYPE = new TypeToken<Map<String, String>>() {}.getType();
     public static Map<String, String> loadTranslationsMap(final Gson gson, final Path path) throws IOException {
-        return gson.fromJson(readString(path), MAP_TYPE);
+        final Map<String, String> result = gson.fromJson(readString(path), MAP_TYPE);
+        return result == null ? new HashMap<>() : result;
     }
 
     public static boolean isSuccessFul(final HttpResponse<?> response) {

@@ -33,7 +33,7 @@ public enum MissingTranslations {;
         final var missingTranslations = new ArrayList<String>();
 
         for (final var entry : loadTranslationsMap(gson, path).entrySet()) {
-            if (entry.getValue().isEmpty()) {
+            if (entry.getValue() == null || entry.getValue().isEmpty()) {
                 missingTranslations.add(entry.getKey());
             }
         }
