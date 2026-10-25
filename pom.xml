@@ -6,7 +6,8 @@
     <version>3</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>A bob plugin that runs static checkers and generates reports.</description>
+    <description>A bob plugin for validating i18n resource files: checks that every language
+        file defines the same keys and that no key is left untranslated.</description>
     <url>https://github.com/codemonstur/bobplugin-translate</url>
 
     <licenses>
@@ -45,6 +46,7 @@
         <maven.compiler.release>17</maven.compiler.release>
 
         <version.plugin.check-cves>1.1.0</version.plugin.check-cves>
+        <version.plugin.codegrade>0.2.0</version.plugin.codegrade>
         <version.plugin.enforcer>3.6.3</version.plugin.enforcer>
         <version.plugin.gpg>3.2.8</version.plugin.gpg>
         <version.plugin.jar>3.5.1</version.plugin.jar>
@@ -101,6 +103,27 @@
                             <includeTestDependencies>true</includeTestDependencies>
                         </configuration>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>codequality</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>com.github.codemonstur</groupId>
+                        <artifactId>codegrade-maven-plugin</artifactId>
+                        <version>${version.plugin.codegrade}</version>
+                        <executions>
+                            <execution><goals><goal>check</goal></goals></execution>
+                        </executions>
+                    </plugin>
+
                 </plugins>
             </build>
         </profile>

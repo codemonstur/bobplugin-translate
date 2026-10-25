@@ -19,12 +19,13 @@ A [Bob the Build Tool](https://github.com/codemonstur/bobthebuildtool) plugin fo
 
 ## Installation
 
-Build and install the plugin into your local Bob repository:
+Add this line to the top of your `bobfile`:
 
-```sh
-make build
-make install-local
 ```
+plugin codemonstur/bobplugin-translate:3
+```
+
+The `translate` command is then available in all your bob tasks.
 
 Or build the jar manually:
 
@@ -75,7 +76,7 @@ bob translate -p src/test/lang check_values
 make build       # compile and package (skips tests)
 make test        # run tests
 make coverage    # run tests with JaCoCo coverage report
-make validate    # check dependency versions, CVEs and licenses
+make validate    # check dependency versions, cves, licenses, and code quality
 ```
 
 ## Project structure
