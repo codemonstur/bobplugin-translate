@@ -10,11 +10,19 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.function.Supplier;
 
+/**
+ * The {@code MultiPartBodyPublisher} class.
+ */
 public final class MultiPartBodyPublisher {
 
     private final List<PartsSpecification> partsSpecificationList = new ArrayList<>();
     private final String boundary = UUID.randomUUID().toString();
 
+    /**
+     * Returns the result of {@code build}.
+     *
+     * @return the result
+     */
     public HttpRequest.BodyPublisher build() {
         if (partsSpecificationList.size() == 0) {
             throw new IllegalStateException("Must have at least one part to build multipart message.");
@@ -23,10 +31,22 @@ public final class MultiPartBodyPublisher {
         return HttpRequest.BodyPublishers.ofByteArrays(PartsIterator::new);
     }
 
+    /**
+     * Returns the boundary.
+     *
+     * @return the result
+     */
     public String getBoundary() {
         return boundary;
     }
 
+    /**
+     * Returns the result of {@code addPart}.
+     *
+     * @param name the name
+     * @param value the value
+     * @return the result
+     */
     public MultiPartBodyPublisher addPart(String name, String value) {
         PartsSpecification newPart = new PartsSpecification();
         newPart.type = PartsSpecification.TYPE.STRING;
@@ -36,6 +56,13 @@ public final class MultiPartBodyPublisher {
         return this;
     }
 
+    /**
+     * Returns the result of {@code addPart}.
+     *
+     * @param name the name
+     * @param value the value
+     * @return the result
+     */
     public MultiPartBodyPublisher addPart(String name, Path value) {
         PartsSpecification newPart = new PartsSpecification();
         newPart.type = PartsSpecification.TYPE.FILE;
@@ -45,6 +72,15 @@ public final class MultiPartBodyPublisher {
         return this;
     }
 
+    /**
+     * Returns the result of {@code addPart}.
+     *
+     * @param name the name
+     * @param value the value
+     * @param filename the filename
+     * @param contentType the content type
+     * @return the result
+     */
     public MultiPartBodyPublisher addPart(String name, Supplier<InputStream> value, String filename, String contentType) {
         PartsSpecification newPart = new PartsSpecification();
         newPart.type = PartsSpecification.TYPE.STREAM;
@@ -163,5 +199,11 @@ public final class MultiPartBodyPublisher {
                 }
             }
         }
+    }
+
+    /**
+     * Creates a new instance.
+     */
+    public MultiPartBodyPublisher() {
     }
 }

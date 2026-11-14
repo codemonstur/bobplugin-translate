@@ -12,8 +12,19 @@ import java.util.function.Consumer;
 import static bobtranslate.util.Functions.loadTranslationsMap;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * The {@code MissingTranslations} enum.
+ */
 public enum MissingTranslations {;
 
+    /**
+     * Returns the result of {@code checkValuesInDir}.
+     *
+     * @param dir the dir
+     * @param reporter the reporter
+     * @return the result
+     * @throws IOException if the operation fails
+     */
     public static int checkValuesInDir(final Path dir, final Consumer<String> reporter) throws IOException {
         int returnCode = 0;
 

@@ -13,8 +13,19 @@ import java.util.function.Consumer;
 import static bobtranslate.util.Functions.loadTranslationsMap;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * The {@code MissingLanguageKeys} enum.
+ */
 public enum MissingLanguageKeys {;
 
+    /**
+     * Returns the result of {@code checkKeysInDir}.
+     *
+     * @param dir the dir
+     * @param reporter the reporter
+     * @return the result
+     * @throws IOException if the operation fails
+     */
     public static int checkKeysInDir(final Path dir, final Consumer<String> reporter) throws IOException {
         final var keysPerFile = new HashMap<Path, Set<String>>();
         final var allKeys = new HashSet<String>();

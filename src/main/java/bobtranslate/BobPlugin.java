@@ -15,10 +15,19 @@ import static bobtranslate.actions.MissingLanguageKeys.checkKeysInDir;
 import static bobtranslate.actions.MissingTranslations.checkValuesInDir;
 import static jcli.CliParserBuilder.newCliParser;
 
+/**
+ * The {@code BobPlugin} enum.
+ */
 public enum BobPlugin {;
 
     private static final String DESCRIPTION_TRANSLATE = "Various tools for fixing language files";
 
+    /**
+     * Performs the {@code installPlugin} operation.
+     *
+     * @param project the project
+     * @throws VersionTooOld if the operation fails
+     */
     public static void installPlugin(final Project project) throws VersionTooOld {
         requireBobVersion("7");
         project.addCommand("translate", DESCRIPTION_TRANSLATE, BobPlugin::translate);
